@@ -1,7 +1,7 @@
 /** AUTHORS:
  * Felipe Moura Madureira - 10748646
  * Lucas Viana Vilela - 10748409
- * Lucas Henrique "Avião" Sant'Anna - 10748521
+ * Lucas Henrique Sant'Anna - 10748521
 */
 
 #include <stdio.h>
