@@ -70,20 +70,20 @@ void bubbleSort(int vectorSize, int vector[], int output[]){
 }
 
 void selectionSort(int vectorSize, int vector[], int output[]){
-    int unsortedSubvector; /* First element in the unsorted subvector's index */
-    int lowestValueIndex; /* Lowest value element in the unsorted subvector's index */
+    int unsortedSubvector; /* Índice do primeiro elemento do vetor não ordenado */
+    int lowestValueIndex; /* Índice do elemento de menor valor do vetor não ordenado */
 
     copyVector(vectorSize, vector, output);
 
-    /* Loops through the whole vector (each pass grows the sorted subvector by 1) */
+    /* Loop por todo o vetor (cada final do loop incrementa unsortedSubvector em 1) */
     for(unsortedSubvector = 0; unsortedSubvector < vectorSize; unsortedSubvector++){
-        /* A new pass starts with it's unsorted subvector's first element as the lowest value */
+        /* No início do loop o elemento atual é usado como referência para o menor valor */
         lowestValueIndex = unsortedSubvector; 
 
-        for(int i = unsortedSubvector+1; i < vectorSize; i++){ /* Loops through the unsorted subvector */
+        for(int i = unsortedSubvector+1; i < vectorSize; i++){ /* Loop pelo vetor não ordenado */
             printf("C %d %d\n", lowestValueIndex, i); /* C = Comparação */
 
-            /* If the current element is greater than the lowest value, set it as the lowest value */
+            /* Se o elemento de referência é maior que o elemento atual, então lowestValueIndex recebe o índice do elemento de menor valor */
             if(output[i] < output[lowestValueIndex]){
                 lowestValueIndex = i;
             }
@@ -95,35 +95,35 @@ void selectionSort(int vectorSize, int vector[], int output[]){
 
 int main(){
     char method[7]; /* "bolha" or "selecao" */
-    int vectorSize; /* Number of numbers to be sorted */
+    int vectorSize; /* Tamanho do vetor */
 
-    scanf("%s",method); /* Get method */
-    scanf("%d",&vectorSize); /* Get vector size */
+    scanf("%s",method); /* Lê o método de ordenação do usuário */
+    scanf("%d",&vectorSize); /* Lê o número de valores a ser digitado pelo usuário */
     
-    int input[vectorSize]; /* Unsorted list of numbers */
-    int output[vectorSize]; /* Sorted list of numbers */
+    int input[vectorSize]; /* Vetor não ordenado de números */
+    int output[vectorSize]; /* Vetor ordenado de números */
 
-    /* Gets unsorted numbers */
+    /* Lê os valores do usuário */
     for(int i = 0; i < vectorSize; i++){
         scanf("%d", &input[i]);
     }
 
-    /* If method = "bolha", bubble sorts the input */
+    /* Se method == "bolha", o método de ordenação utilizado é o bubbleSort */
     if(strcmp(method,"bolha") == 0){
         bubbleSort(vectorSize,input,output);
     }
 
-    /* If method = "selecao", selection sorts the input */
+    /* Se method == "selecao", o método de ordenação utilizado é o selectionSort */
     else if(strcmp(method,"selecao") == 0){
         selectionSort(vectorSize,input,output);
     }
 
-    /* If method equals neither, end the program with error */
+    /* Se o usuário não digitou nenhum dos métodos acima relatados, o programa é fechado com erro */
     else{
         return 1;
     }
 
-    /* Prints the sorted list of numbers (output) */
+    /* Imprime o vetor com os valores ordenados (output) */
     for(int i = 0; i < vectorSize; i++){
         printf("%d ", output[i]);
     }
