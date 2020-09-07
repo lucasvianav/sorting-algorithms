@@ -25,7 +25,7 @@ void swapElements(int vector[], int index1, int index2){
      * PRO: O arquivo fornecido para teste indicou que deve ser usado;
      * CON: A versão mostrada em aula não utilizava;
      * 
-     *Como a saída deve corresponder com o esperado( e também como o arquivo de 
+     * Como a saída deve corresponder com o esperado( e também como o arquivo de 
      * teste de caso fornecido), então provavelmente é melhor utilizar.
     */
 
