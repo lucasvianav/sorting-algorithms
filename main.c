@@ -7,7 +7,8 @@
 #include <stdio.h>
 #include <string.h>
 
-/* Copies inputVector to outputVector */
+
+/* Copia o vetor InputVector para o outputVector */
 void copyVector(int vectorSize, int inputVector[], int outputVector[]){
     for(int i = 0; i < vectorSize; i++){
         outputVector[i] = inputVector[i];
@@ -16,20 +17,20 @@ void copyVector(int vectorSize, int inputVector[], int outputVector[]){
     return;
 }
 
-/* Swaps vector[index1] with vector[index2] */
+/* Realiza a troca do número em vector[index1] com o do vector[index2] */
 void swapElements(int vector[], int index1, int index2){
 
-    /** To use or not to use 'if(index1 != index2){}'?
-     * PRO: Using it would be a more optimized version of the algorithms; 
+    /** Usar ou não usar 'if(index1 != index2){}'?
+     * PRO: Utilizar tornaria essa uma versão mais otimizada; 
      * PRO: The provided test-case files's 1.out indicates that it should be used;
-     * CON: The version presented in class doesn't use it;
+     * CON: A versão mostrada em aula não utilizava;
      * 
      * As the output it must exactly match what is expected (and it should also 
      * match the provided test-case files), it probably is best to use it.
     */
 
    if(index1 != index2){
-        int tmp; /* Auxiliar variable */
+        int tmp; /* variável auxiliar */
 
         printf("T %d %d\n", index1, index2); /* T = Troca */
 
@@ -43,31 +44,32 @@ void swapElements(int vector[], int index1, int index2){
 }
 
 void bubbleSort(int vectorSize, int vector[], int output[]){
-    int hasSwapped; /* Has a swap occurred in the last pass? 1 = yes / 0 = no */
-    int lastSwapped; /* Last swapped element in this pass' index */
-    int sentinella = vectorSize; /* Last unsorted element's index */
+    int hasSwapped; /* Ocorreu uma troca na passagem anterior? 1 = sim / 0 = não */
+    int lastSwapped; /* O último elementro trocado nessa passagem' index */
+    int sentinella = vectorSize; /* O índice do último elemento desordenado */
 
     copyVector(vectorSize, vector, output);
 
     do{
-        hasSwapped = 0; /* A new pass starts with no swaps */
+        hasSwapped = 0; /* Uma nova passagem se inicio quando não há trocas */
 
-        for(int i = 1; i < sentinella; i++){ /* Loops through the vector */
+        for(int i = 1; i < sentinella; i++){ /* Loops através do vetor */
             printf("C %d %d\n", i-1, i); /* C = Comparação */
 
-            if(output[i-1] > output[i]){ /* If an element is greater than it's subsequent, swap'em */
+            if(output[i-1] > output[i]){ /* Se a posição subsequente tiver um elemento de menor número em comparação a atual, então os elementos trocarão de posição */
                 swapElements(output,i-1,i);
 
-                hasSwapped = 1; /* A swap just occurred */
+                hasSwapped = 1; /* A troca aconteceu */
                 lastSwapped = i;
             }
         }
 
-        sentinella = lastSwapped; /* Sentinella is moved to the last swapped element in this pass */
-    }while(hasSwapped == 1); /* Once a pass with no swaps occur, the vector is sorted */
+        sentinella = lastSwapped; /* Sentinella é colocado no último elemento que foi trocado na passagem */
+    }while(hasSwapped == 1); /* O vetor é considerado ordenado quando uma passagem apresenta nenhuma troca*/
 
     return;
 }
+
 
 void selectionSort(int vectorSize, int vector[], int output[]){
     int unsortedSubvector; /* Índice do primeiro elemento do vetor não ordenado */
