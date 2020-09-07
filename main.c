@@ -1,5 +1,5 @@
 /** AUTHORS:
- * Felipe "Felps" Moura - noUSP
+ * Felipe Moura Madureira - 10748646
  * Lucas Viana Vilela - 10748409
  * Lucas Henrique "Avião" Sant'Anna - 10748521
 */
