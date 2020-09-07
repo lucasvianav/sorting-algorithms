@@ -1,7 +1,7 @@
 /** AUTHORS:
  * Felipe "Felps" Moura - noUSP
  * Lucas Viana Vilela - 10748409
- * Lucas Henrique "Avião" Sant'Anna - noUSP
+ * Lucas Henrique "Avião" Sant'Anna - 10748521
 */
 
 #include <stdio.h>
