@@ -1,4 +1,4 @@
-/** AUTHORS:
+/** AUTORES:
  * Felipe Moura Madureira - 10748646
  * Lucas Viana Vilela - 10748409
  * Lucas Henrique Sant'Anna - 10748521
@@ -8,7 +8,7 @@
 #include <string.h>
 
 
-/* Copia o vetor InputVector para o outputVector */
+/* Copia oS elemntos do vetor InputVector para o outputVector */
 void copyVector(int vectorSize, int inputVector[], int outputVector[]){
     for(int i = 0; i < vectorSize; i++){
         outputVector[i] = inputVector[i];
@@ -22,11 +22,11 @@ void swapElements(int vector[], int index1, int index2){
 
     /** Usar ou não usar 'if(index1 != index2){}'?
      * PRO: Utilizar tornaria essa uma versão mais otimizada; 
-     * PRO: The provided test-case files's 1.out indicates that it should be used;
+     * PRO: O arquivo fornecido para teste indicou que deve ser usado;
      * CON: A versão mostrada em aula não utilizava;
      * 
-     * As the output it must exactly match what is expected (and it should also 
-     * match the provided test-case files), it probably is best to use it.
+     *Como a saída deve corresponder com o esperado( e também como o arquivo de 
+     * teste de caso fornecido), então provavelmente é melhor utilizar.
     */
 
    if(index1 != index2){
