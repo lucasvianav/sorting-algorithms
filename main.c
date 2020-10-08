@@ -76,7 +76,6 @@ int main(int argc, char **argv){
         }
     }
 
-
     // Sets method to lowecase
     for(int i = 0; method[i]; i++){ method[i] = (char) tolower(method[i]); }
 
@@ -105,17 +104,33 @@ int main(int argc, char **argv){
         elapsedTime = ((double)clock() - elapsedTime)/CLOCKS_PER_SEC; 
     }
 
+    else if(!strcmp(method, "heap")){
+        elapsedTime = (double) clock(); 
+        heapSort(vector, vectorSize);
+        elapsedTime = ((double)clock() - elapsedTime)/CLOCKS_PER_SEC; 
+    }
+
+    else if(!strcmp(method, "shell")){
+        elapsedTime = (double) clock(); 
+        shellSort(vector, vectorSize);
+        elapsedTime = ((double)clock() - elapsedTime)/CLOCKS_PER_SEC; 
+    }
+
+    else if(!strcmp(method, "quick")){
+        elapsedTime = (double) clock(); 
+        quickSort(vector, 0, vectorSize - 1);
+        elapsedTime = ((double)clock() - elapsedTime)/CLOCKS_PER_SEC; 
+    }
+
     else{ 
         free(vector);
         if(argc == 1){ free(method); }
+        printf("\n [*] Sorted 0 numbers and took 0s.\n\n");
         return 1; 
     }
 
     // Prints the sorted vector
-    if(printSorted){
-        printf("\n [*] Sorted vector: ");
-        for(int i = 0; i < vectorSize; i++){ printf("%d ", vector[i]); }
-    }
+    if(printSorted){ printf("\n [*] Sorted vector: "); printVector(vector, vectorSize, False); }
 
     // Prints the vector size and the elapsed time
     printf("\n [*] Sorted: %d numbers.\n", vectorSize);

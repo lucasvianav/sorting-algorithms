@@ -67,6 +67,35 @@ void mergeSubvectors(int *vector, int firstLeftIndex, int firstRightIndex, int s
     return;
 }
 
+// Receives a parent element and turns the vector into a heap starting at it
+void heapify(int *vector, int parent, int lastElement){
+    int child;
+
+    while(parent <= lastElement){
+        child = 2*parent + 1;
+
+        if(child <= lastElement){
+            // Selects the highest value child
+            if(child + 1 <= lastElement && vector[child+1] > vector[child]){ child++; }
+
+            if(vector[parent] < vector[child]){ swapElements(vector, parent, child); }
+        }
+
+        parent = child;
+    }
+
+    return;
+}
+
+// Prints inline
+void printVector(int *vector, int vectorSize, boolean newline){
+    for(int i = 0; i < vectorSize; i++){
+        printf("%d ", vector[i]);
+    }
+    if(newline == True){ printf("\n"); }
+
+    return;
+}
 
 
 // SELECTION SORT
@@ -126,20 +155,17 @@ void insertionSort(int *vector, int vectorSize){
 
     // Loops through the whole vector
     for(int i = 1; i < vectorSize; i++){
-        int aux = 0; // Auxiliar variable in order to index the "current" element
+        int aux = vector[i]; // Auxiliar variable to store the "current" element
 
         // Goes through the already passed part of the vector
-        for(int j = i - 1; j >= 0; j--){
-
-            // And takes the "current" element as far left as needed
-            if(vector[i-aux] < vector[j]){
-                swapElements(vector, j, i-aux);
-                aux++;
-
-            }
-            
-            else{ break; }
+        // And takes the "current" element as far left as needed
+        int j = i - 1;
+        while(j >= 0 && aux < vector[j]){ 
+            vector[j+1] = vector[j]; 
+            j--;
         }
+
+        vector[j+1] = aux;
     }
 
     return;
@@ -158,4 +184,77 @@ void mergeSort(int *vector, int leftIndex, int rightIndex){
     }
 
     return;
+}
+
+// HEAP SORT
+void heapSort(int *vector, int vectorSize){
+    int unsortedSubvector; // Last element in the unsorted subvector's index
+
+    // Turns the input vector into a max heap
+    for(int i = (int) (vectorSize-1)/2; i >= 0; i--){ heapify(vector, i, vectorSize-1); }
+
+    // Actually sorts
+    for(unsortedSubvector = vectorSize-1; unsortedSubvector > 0; unsortedSubvector--){
+        swapElements(vector, 0, unsortedSubvector);
+        heapify(vector, 0, unsortedSubvector - 1);
+    }
+
+    return;
+
+}
+
+// SHELL SORT
+void shellSort(int *vector, int vectorSize){
+    int gap = 1;
+
+    while(gap <= vectorSize){ gap *= 2; }
+    gap = gap/2 - 1;
+
+    while(gap > 0){
+        for(int i = gap; i < vectorSize; i += gap){
+            int aux = vector[i]; 
+
+            int j = i - gap;
+            while(j >= 0 && aux < vector[j]){ 
+                vector[j+gap] = vector[j]; 
+                j -= gap;
+            }
+
+            vector[j+gap] = aux;
+        }
+
+        gap /= 2;
+    }
+
+    return;
+
+}
+
+// QUICK SORT
+void quickSort(int *vector, int leftIndex, int rightIndex){
+    if(leftIndex < rightIndex){
+
+        int pivot = vector[(int)((rightIndex+leftIndex)/2)];
+        int separationIndex;
+        int left = leftIndex, right = rightIndex;
+
+        while(True){
+            while(vector[left] < pivot){ left++; }
+            while(vector[right] > pivot){ right--; }
+
+            if(left < right){ swapElements(vector, left++, right--); }
+
+            else{
+                separationIndex = right;
+                break; 
+            }
+
+        }
+
+        quickSort(vector, leftIndex, separationIndex);
+        quickSort(vector, separationIndex+1, rightIndex);
+    }
+
+    return;
+
 }
