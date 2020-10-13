@@ -233,26 +233,27 @@ void shellSort(int *vector, int vectorSize){
 // QUICK SORT
 void quickSort(int *vector, int leftIndex, int rightIndex){
     if(leftIndex < rightIndex){
-
         int pivot = vector[(int)((rightIndex+leftIndex)/2)];
-        int separationIndex;
         int left = leftIndex, right = rightIndex;
 
         while(True){
+            // Selects elements from the left that are >= to the pivot
             while(vector[left] < pivot){ left++; }
+
+            // Selects elements from the right that are <= to the pivot
             while(vector[right] > pivot){ right--; }
 
-            if(left < right){ swapElements(vector, left++, right--); }
+            // If the swapping the above selected elements is worth it, do it
+            if(left < right){ swapElements(vector, left++, right--); } // And pass to the next element
 
-            else{
-                separationIndex = right;
-                break; 
-            }
+            // If the swap is not worth it, the vector was successfully partitionted
+            else{ break; }
 
         }
 
-        quickSort(vector, leftIndex, separationIndex);
-        quickSort(vector, separationIndex+1, rightIndex);
+        // Sorts the partitions
+        quickSort(vector, leftIndex, right);
+        quickSort(vector, right+1, rightIndex);
     }
 
     return;
