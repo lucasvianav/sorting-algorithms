@@ -205,12 +205,13 @@ void heapSort(int *vector, int vectorSize){
 
 // SHELL SORT
 void shellSort(int *vector, int vectorSize){
+    // Sets gap to 2^k - 1
     int gap = 1;
-
     while(gap <= vectorSize){ gap *= 2; }
     gap = gap/2 - 1;
 
     while(gap > 0){
+        // Insertion sorts the gapped-subvector
         for(int i = gap; i < vectorSize; i += gap){
             int aux = vector[i]; 
 
@@ -223,6 +224,7 @@ void shellSort(int *vector, int vectorSize){
             vector[j+gap] = aux;
         }
 
+        // Halves the gap each iteration
         gap /= 2;
     }
 
