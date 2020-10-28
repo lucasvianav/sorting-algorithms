@@ -4,6 +4,11 @@ Repository for the Introduction to Computer Science II offered at ICMC - USP, by
 
 This repository contains specifically all sorting methods addressed in class:
 - Selection Sort
-- Bubble Sort
+- Bubble Sort (sentinella)
 - Insetion Sort
-- Merge Sort
+- Merge Sort (recursive)
+- Heap Sort
+- Shell Sort
+- Quick Sort (recursive)
+- Counting Sort
+- Radix Sort
