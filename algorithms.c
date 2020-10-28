@@ -3,34 +3,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define True 1
-#define False 0
-typedef int boolean;
-
-// Returns a copy of the received vector
-int *copyVector(int *vector, int vectorSize){
-    int *outputVector = (int *)malloc(vectorSize * sizeof(int));
-
-    for(int i = 0; i < vectorSize; i++){
-        outputVector[i] = vector[i];
-    }
-
-    return outputVector;
-}
-
-// Swaps vector[i] and vector[j]
-void swapElements(int *vector, int i, int j){
-   if(i != j){
-        int tmp; // Auxiliar variable
-
-        tmp = vector[i];
-        vector[i] = vector[j];
-        vector[j] = tmp;
-   }
-    
-    return;
-}
-
 // Receives a vector and the position of two sorted subvectors inside it - merges both of them into a fully sorted one
 void mergeSubvectors(int *vector, int firstLeftIndex, int firstRightIndex, int secondLeftIndex, int secondRightIndex){
     int vectorSize = (firstRightIndex - firstLeftIndex + 1) + (secondRightIndex - secondLeftIndex + 1);
@@ -87,15 +59,6 @@ void heapify(int *vector, int parent, int lastElement){
     return;
 }
 
-// Prints inline
-void printVector(int *vector, int vectorSize, boolean newline){
-    for(int i = 0; i < vectorSize; i++){
-        printf("%d ", vector[i]);
-    }
-    if(newline == True){ printf("\n"); }
-
-    return;
-}
 
 
 // SELECTION SORT
@@ -260,4 +223,63 @@ void quickSort(int *vector, int leftIndex, int rightIndex){
 
     return;
 
+}
+
+// COUNTING SORT
+void countingSort(int *vector, int vectorSize, int maxValue){
+    int *counters = (int *)malloc((maxValue + 1) * sizeof(int));
+    int *aux = (int *)malloc(vectorSize * sizeof(int));
+
+    // Sets all counters to 0
+    for(int i = 0; i <= maxValue; i++){ counters[i] = 0; }
+
+    // Counts how many of each number the vector contains
+    for(int i = 0; i < vectorSize; i++){ counters[vector[i]]++; }
+
+    // counters[i]: quantity of i in the vector ---> last position + 1 of an i in the vector
+    for(int i = 1; i <= maxValue; i++){ counters[i] += counters[i-1]; }
+
+    // Sorts (stable)
+    for(int i = vectorSize - 1; i >= 0; i--){
+        aux[counters[vector[i]]-- - 1] = vector[i];
+    }
+
+    for(int i = 0; i < vectorSize; i++){ vector[i] = aux[i]; }
+
+    free(counters);
+    free(aux);
+
+    return;
+}
+
+// RADIX SORT
+void radixSort(int *vector, int vectorSize, int maxValue, int base){
+    int *counters = (int *)malloc((base+1) * sizeof(int));
+    int *aux = (int *)malloc(vectorSize * sizeof(int));
+
+    // Counting sorts each digit d (starting by the unit, d = 1)
+    for(unsigned long d = 1; maxValue/d > 0; d *= base){
+        // Sets all counters to 0
+        // Digit range is 0-base --> digitMaxValue = base
+        for(int i = 0; i <= base; i++){ counters[i] = 0; }
+
+        // Counts how many of each digit in the d position the vector contains
+        // (vector[i]/d) % base = value of the digit in the position d of the number vector[i]
+        for(int i = 0; i < vectorSize; i++){ counters[(vector[i]/d) % base]++; }
+
+        // counters[i]: quantity of i in the vector ---> last position + 1 of an i in the vector
+        for(int i = 1; i <= base; i++){ counters[i] += counters[i-1]; }
+
+        // Sorts (stable)
+        for(int i = vectorSize - 1; i >= 0; i--){
+            aux[counters[(vector[i]/d) % base]-- - 1] = vector[i];
+        }
+
+        for(int i = 0; i < vectorSize; i++){ vector[i] = aux[i]; }
+    }
+
+    free(counters);
+    free(aux);
+
+    return;
 }

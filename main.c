@@ -5,6 +5,7 @@
 #include <string.h>
 #include <time.h>
 #include <ctype.h>
+#include "util.c"
 #include "algorithms.c"
 
 #define METHOD_LENGTH 10
@@ -76,6 +77,8 @@ int main(int argc, char **argv){
         }
     }
 
+    if(printSorted){ printf("\n [*] Input vector: "); printVector(vector, vectorSize, False); }
+
     // Sets method to lowecase
     for(int i = 0; method[i]; i++){ method[i] = (char) tolower(method[i]); }
 
@@ -119,6 +122,22 @@ int main(int argc, char **argv){
     else if(!strcmp(method, "quick")){
         elapsedTime = (double) clock(); 
         quickSort(vector, 0, vectorSize - 1);
+        elapsedTime = ((double)clock() - elapsedTime)/CLOCKS_PER_SEC; 
+    }
+
+    else if (!strcmp(method, "counting")){
+        int max = maxValue(vector, vectorSize);
+
+        elapsedTime = (double) clock(); 
+        countingSort(vector, vectorSize, max);
+        elapsedTime = ((double)clock() - elapsedTime)/CLOCKS_PER_SEC; 
+    }
+
+    else if (!strcmp(method, "radix")){
+        int max = maxValue(vector, vectorSize);
+
+        elapsedTime = (double) clock(); 
+        radixSort(vector, vectorSize, max, 16);
         elapsedTime = ((double)clock() - elapsedTime)/CLOCKS_PER_SEC; 
     }
 
