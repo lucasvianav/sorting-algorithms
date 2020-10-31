@@ -1,4 +1,5 @@
 # SSC0503 - Introduction to Computer Science II
+## Sorting Algorithms
 
 Repository for the Introduction to Computer Science II offered at ICMC - USP, by professor Adenilso Simão.
 
