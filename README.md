@@ -3,7 +3,7 @@
 
 Repository for the Introduction to Computer Science II offered at ICMC - USP, by professor Adenilso Simão.
 
-This repository contains specifically all sorting methods addressed in class:
+This repository contains specifically all sorting algorithms addressed in class:
 - Selection Sort
 - Bubble Sort (sentinella)
 - Insetion Sort
@@ -15,7 +15,7 @@ This repository contains specifically all sorting methods addressed in class:
 - Radix Sort
 
 ## Sort from terminal
-*command:* **./sort** \[method\] y{0,1} \[vector or vector size\]
+*command:* **./sort** \[algorithm\] y{0,1} \[vector or vector size\]
 - method: selection; bubble; insertion; merge; heap; shell; quick; counting; radix
 - y: insert if you with for the sorted vector to be printed
 - vector: any number of integers separated by a whitespace
